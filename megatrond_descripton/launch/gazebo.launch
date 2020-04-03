@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+      
+    <!-- Robot Model -->
+    <param 
+    name="robot_description"
+    command="$(find xacro)/xacro --inorder '$(find megatrond_description)/urdf/megatrond.xacro'"/>
+    
+    
+    <!-- Robot spawn pose -->
+    <arg name="x" default="0"/>
+    <arg name="y" default="0"/>
+    <arg name="z" default="0"/>
+    
+    <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 base_link base_footprint 40" />
+
+    <include
+    file="$(find gazebo_ros)/launch/empty_world.launch" />
+    
+    <!-- Spawn the robot model -->
+    <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    output="screen"
+    args="-urdf -param robot_description -model megatrond -x $(arg x) -y $(arg y) -z $(arg z)"/>
+    <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true"/>
+    
+    <!-- Tell all nodes to use simulation time -->
+    <param name="/use_sim_time" value="true"/>   
+    
+    <!-- Load Controllers -->
+    <rosparam
+    command="load" file="$(find megatrond_description)/config/joints.yaml"/>
+
+    <node name="controller_spawner" pkg="controller_manager" type="spawner"
+            respawn="false" output="screen"
+            args="
+            joint_state_controller
+            vel_ctrl_frw
+            vel_ctrl_flw
+            vel_ctrl_rrw
+            vel_ctrl_rlw
+            --timeout 60">
+    </node>
+    
+    <node name="megatrond_control" pkg="megatrond_control" type="gazebo_control.py" output="screen"> 
+    </node>
+    
+    <node name="state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+          respawn="false" output="screen">
+          <param name="publish frequency" type="double" value="5.0" />
+    </node>
+</launch>
