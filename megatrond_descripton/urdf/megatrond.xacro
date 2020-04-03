@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter 
+     The document has been modified by Didrik E. Fjereide -->
+
+<robot name="megatrond" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+  <!-- Begin - Include -->
+  <xacro:include filename="$(find megatrond_description)/urdf/physics.xacro" />
+  <xacro:include filename="$(find megatrond_description)/urdf/plugins.xacro" />
+  <!-- End - Include -->
+
+  <link
+  name="dummy">
+  </link>
+<!-- Base link --> 
+  <link
+    name="base_lnk">
+    <inertial>
+      <origin
+        xyz="-0.000972685832883347 3.12612398079004E-07 0.612414556322358"
+        rpy="0 0 1.570795"/>
+      <mass
+        value="330" />
+      <inertia
+        ixx="194.051784427"
+        ixy="-0.000002355"
+        ixz="-0.222021371"
+        iyy="240.950271196"
+        iyz="-0.000003455"
+        izz="84.156564733" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 1.570795" />
+      <geometry>
+        <mesh
+          filename="package://megatrond_description/meshes/base_lnk.STL" />
+      </geometry>
+      <material name="darkgray">
+        <color rgba="0.3 0.3 0.3 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.705"
+        rpy="0 0 1.570795" />
+      <geometry>
+        <box size="1.6 0.740 1.410"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="dummy_joint" type="fixed">
+     <parent link="dummy"/>
+     <child link="base_lnk"/>
+   </joint>
+
+<!-- Front right wheel link --> 
+  <link
+    name="flw_lnk">
+    <inertial>
+      <origin
+        xyz="2.46838509088132E-06 0.000207503444381474 2.57153118754516E-06"
+        rpy="0 0 0" />
+      <mass
+        value="2.344" />
+      <inertia
+        ixx="0.008294463"
+        ixy="0.000000134"
+        ixz="-0.000000111"
+        iyy="0.013432708"
+        iyz="-0.000000036"
+        izz="0.00829408" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://megatrond_description/meshes/frw_lnk.STL" />
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.57079632679 0 0" />
+      <geometry>
+        <cylinder radius="0.1015" length="0.089"/>
+      </geometry>
+    </collision>
+  </link>
+
+<!-- Front right wheel joint --> 
+  <joint
+    name="flw_jnt"
+    type="continuous">
+    <origin
+      xyz="-0.265 0.6305 -0.0333"
+      rpy="0 0 1.570795" />
+    <parent
+      link="base_lnk" />
+    <child
+      link="flw_lnk" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+
+<!-- Front right wheel transmission --> 
+  <transmission name="frw_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="frw_jnt">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="frw_mtr">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<!-- Front left wheel link --> 
+  <link
+    name="frw_lnk">
+    <inertial>
+      <origin
+        xyz="1.5088754131698E-06 0.000432578966736485 4.69810776854152E-06"
+        rpy="0 0 0" />
+      <mass
+        value="2.344" />
+      <inertia
+        ixx="0.008294463"
+        ixy="0.000000134"
+        ixz="-0.000000111"
+        iyy="0.013432708"
+        iyz="-0.000000036"
+        izz="0.00829408"/>
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://megatrond_description/meshes/flw_lnk.STL" />
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.57079632679 0 0" />
+      <geometry>
+        <cylinder radius="0.1015" length="0.089"/>
+      </geometry>
+    </collision>
+  </link>
+
+<!-- Front left wheel joint --> 
+  <joint
+    name="frw_jnt"
+    type="continuous">
+    <origin
+      xyz="0.265 0.6305 -0.0333"
+      rpy="0 0 1.570795" />
+    <parent
+      link="base_lnk" />
+    <child
+      link="frw_lnk" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+
+<!-- Front left wheel transmission --> 
+  <transmission name="flw_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="flw_jnt">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="flw_mtr">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<!-- Rear right wheel link --> 
+  <link
+    name="rlw_lnk">
+    <inertial>
+      <origin
+        xyz="2.43278804989977E-06 0.000432579291648749 4.29250331829278E-06"
+        rpy="0 0 0" />
+      <mass
+        value="2.344" />
+      <inertia
+        ixx="0.008294463"
+        ixy="0.000000134"
+        ixz="-0.000000111"
+        iyy="0.013432708"
+        iyz="-0.000000036"
+        izz="0.00829408" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://megatrond_description/meshes/rrw_lnk.STL" />
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.57079632679 0 0" />
+      <geometry>
+        <cylinder radius="0.1015" length="0.089"/>
+      </geometry>
+    </collision>
+  </link>
+
+<!-- Rear right wheel joint --> 
+  <joint
+    name="rlw_jnt"
+    type="continuous">
+    <origin
+      xyz="-0.265 -0.6305 -0.0333"
+      rpy="0 0 1.570795" />
+    <parent
+      link="base_lnk" />
+    <child
+      link="rlw_lnk" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+
+<!-- Rear right wheel transmission --> 
+  <transmission name="rrw_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rrw_jnt">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rrw_mtr">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<!-- Rear left wheel link --> 
+  <link
+    name="rrw_lnk">
+    <inertial>
+      <origin
+        xyz="2.16054732371518E-06 0.000207503203965842 2.83462955391611E-06"
+        rpy="0 0 0" />
+      <mass
+        value="2.344" />
+      <inertia
+        ixx="0.008294463"
+        ixy="0.000000134"
+        ixz="-0.000000111"
+        iyy="0.013432708"
+        iyz="-0.000000036"
+        izz="0.00829408" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://megatrond_description/meshes/rlw_lnk.STL" />
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.57079632679 0 0" />
+      <geometry>
+        <cylinder radius="0.1015" length="0.089"/>
+      </geometry>
+    </collision>
+  </link>
+
+<!-- Rear left wheel joint --> 
+  <joint
+    name="rrw_jnt"
+    type="continuous">
+    <origin
+      xyz="0.265 -0.6305 -0.0333"
+      rpy="0 0 1.570795" />
+    <parent
+      link="base_lnk" />
+    <child
+      link="rrw_lnk" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+
+<!-- Rear left wheel transmission --> 
+  <transmission name="rlw_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rlw_jnt">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rlw_mtr">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<!-- Front camera link --> 
+  <link
+    name="frnt_cam_lnk">
+    <inertial>
+      <origin
+        xyz="-0.0131722832618059 -0.00168229592489122 -2.45663830655829E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.03819" />
+      <inertia
+        ixx="0.000010394"
+        ixy="-0.000000013"
+        ixz="-0.000001013"
+        iyy="0.000031694"
+        iyz="-0.000000014"
+        izz="0.000024794" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://megatrond_description/meshes/frnt_cam_lnk.STL" />
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0125 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.089 0.026"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="frnt_cam_jnt"
+    type="fixed">
+    <origin
+      xyz="0 0.80168 -0.012756"
+      rpy="0 0 1.570795" />
+    <parent
+      link="base_lnk" />
+    <child
+      link="frnt_cam_lnk" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+<!-- Rear camera link --> 
+  <link
+    name="rear_cam_lnk">
+    <inertial>
+      <origin
+        xyz="-0.0131722843354336 -0.00168229191375158 -2.46168612716424E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.03819" />
+      <inertia
+        ixx="0.000010394"
+        ixy="-0.000000013"
+        ixz="-0.000001013"
+        iyy="0.000031694"
+        iyz="-0.000000014"
+        izz="0.000024794" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://megatrond_description/meshes/rear_cam_lnk.STL" />
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0125 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.089 0.026"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rear_cam_jnt"
+    type="fixed">
+    <origin
+      xyz="0 -0.80155 -0.013776"
+      rpy="0 -0.17453 -1.570795" />
+    <parent
+      link="base_lnk" />
+    <child
+      link="rear_cam_lnk" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+<!-- Right camera link --> 
+  <link
+    name="left_cam_lnk">
+    <inertial>
+      <origin
+        xyz="-0.0131722833510124 -0.00168229558316457 -2.45653943939383E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.0381911728516357" />
+      <inertia
+        ixx="0.000010394"
+        ixy="-0.000000013"
+        ixz="-0.000001013"
+        iyy="0.000031694"
+        iyz="-0.000000014"
+        izz="0.000024794" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://megatrond_description/meshes/right_cam_lnk.STL" />
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0125 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.089 0.026"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_cam_jnt"
+    type="fixed">
+    <origin
+      xyz="-0.37155 0 -0.013776"
+      rpy="0 -0.17453 3.14159" />
+    <parent
+      link="base_lnk" />
+    <child
+      link="left_cam_lnk" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+<!-- Left camera link --> 
+  <link
+    name="right_cam_lnk">
+    <inertial>
+      <origin
+        xyz="-0.0131722832618305 -0.00168229592492075 -2.45663830295006E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.03819" />
+      <inertia
+        ixx="0.000010394"
+        ixy="-0.000000013"
+        ixz="-0.000001013"
+        iyy="0.000031694"
+        iyz="-0.000000014"
+        izz="0.000024794" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://megatrond_description/meshes/left_cam_lnk.STL" />
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0125 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.089 0.026"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_cam_jnt"
+    type="fixed">
+    <origin
+      xyz="0.371549676766599 0 -0.0137763564971297"
+      rpy="0 -0.174532925199419 0" />
+    <parent
+      link="base_lnk" />
+    <child
+      link="right_cam_lnk" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  
+</robot>
