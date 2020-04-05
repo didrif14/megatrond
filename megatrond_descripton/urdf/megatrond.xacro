@@ -10,8 +10,7 @@
   <xacro:include filename="$(find megatrond_description)/urdf/physics.xacro" />
   <xacro:include filename="$(find megatrond_description)/urdf/plugins.xacro" />
   <xacro:include filename="$(find megatrond_description)/urdf/_D435.urdf.xacro">
-    <sensor_d435 parent="frnt_cam_lnk">
-    </sensor_d435>
+    <sensor_d435 parent="frnt_cam_lnk"></sensor_d435>
   </xacro:include>
   <!-- End - Include -->
 
