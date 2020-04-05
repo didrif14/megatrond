@@ -9,6 +9,10 @@
   <!-- Begin - Include -->
   <xacro:include filename="$(find megatrond_description)/urdf/physics.xacro" />
   <xacro:include filename="$(find megatrond_description)/urdf/plugins.xacro" />
+  <xacro:include filename="$(find megatrond_description)/urdf/_D435.urdf.xacro">
+    <sensor_d435 parent="frnt_cam_lnk">
+    </sensor_d435>
+  </xacro:include>
   <!-- End - Include -->
 
   <link
@@ -369,162 +373,6 @@
       link="base_lnk" />
     <child
       link="frnt_cam_lnk" />
-    <axis
-      xyz="0 0 0" />
-  </joint>
-
-<!-- Rear camera link --> 
-  <link
-    name="rear_cam_lnk">
-    <inertial>
-      <origin
-        xyz="-0.0131722843354336 -0.00168229191375158 -2.46168612716424E-06"
-        rpy="0 0 0" />
-      <mass
-        value="0.03819" />
-      <inertia
-        ixx="0.000010394"
-        ixy="-0.000000013"
-        ixz="-0.000001013"
-        iyy="0.000031694"
-        iyz="-0.000000014"
-        izz="0.000024794" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://megatrond_description/meshes/rear_cam_lnk.STL" />
-      </geometry>
-      <material name="red">
-        <color rgba="0.8 0.0 0.0 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="-0.0125 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <box size="0.025 0.089 0.026"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="rear_cam_jnt"
-    type="fixed">
-    <origin
-      xyz="0 -0.80155 -0.013776"
-      rpy="0 -0.17453 -1.570795" />
-    <parent
-      link="base_lnk" />
-    <child
-      link="rear_cam_lnk" />
-    <axis
-      xyz="0 0 0" />
-  </joint>
-
-<!-- Right camera link --> 
-  <link
-    name="left_cam_lnk">
-    <inertial>
-      <origin
-        xyz="-0.0131722833510124 -0.00168229558316457 -2.45653943939383E-06"
-        rpy="0 0 0" />
-      <mass
-        value="0.0381911728516357" />
-      <inertia
-        ixx="0.000010394"
-        ixy="-0.000000013"
-        ixz="-0.000001013"
-        iyy="0.000031694"
-        iyz="-0.000000014"
-        izz="0.000024794" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://megatrond_description/meshes/right_cam_lnk.STL" />
-      </geometry>
-      <material name="red">
-        <color rgba="0.8 0.0 0.0 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="-0.0125 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <box size="0.025 0.089 0.026"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="left_cam_jnt"
-    type="fixed">
-    <origin
-      xyz="-0.37155 0 -0.013776"
-      rpy="0 -0.17453 3.14159" />
-    <parent
-      link="base_lnk" />
-    <child
-      link="left_cam_lnk" />
-    <axis
-      xyz="0 0 0" />
-  </joint>
-
-<!-- Left camera link --> 
-  <link
-    name="right_cam_lnk">
-    <inertial>
-      <origin
-        xyz="-0.0131722832618305 -0.00168229592492075 -2.45663830295006E-06"
-        rpy="0 0 0" />
-      <mass
-        value="0.03819" />
-      <inertia
-        ixx="0.000010394"
-        ixy="-0.000000013"
-        ixz="-0.000001013"
-        iyy="0.000031694"
-        iyz="-0.000000014"
-        izz="0.000024794" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://megatrond_description/meshes/left_cam_lnk.STL" />
-      </geometry>
-      <material name="red">
-        <color rgba="0.8 0.0 0.0 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="-0.0125 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <box size="0.025 0.089 0.026"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="right_cam_jnt"
-    type="fixed">
-    <origin
-      xyz="0.371549676766599 0 -0.0137763564971297"
-      rpy="0 -0.174532925199419 0" />
-    <parent
-      link="base_lnk" />
-    <child
-      link="right_cam_lnk" />
     <axis
       xyz="0 0 0" />
   </joint>
