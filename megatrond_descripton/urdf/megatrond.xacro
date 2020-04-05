@@ -327,40 +327,6 @@
 <!-- Front camera link --> 
   <link
     name="frnt_cam_lnk">
-    <inertial>
-      <origin
-        xyz="-0.0131722832618059 -0.00168229592489122 -2.45663830655829E-06"
-        rpy="0 0 0" />
-      <mass
-        value="0.03819" />
-      <inertia
-        ixx="0.000010394"
-        ixy="-0.000000013"
-        ixz="-0.000001013"
-        iyy="0.000031694"
-        iyz="-0.000000014"
-        izz="0.000024794" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://megatrond_description/meshes/frnt_cam_lnk.STL" />
-      </geometry>
-      <material name="red">
-        <color rgba="0.8 0.0 0.0 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="-0.0125 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <box size="0.025 0.089 0.026"/>
-      </geometry>
-    </collision>
   </link>
   <joint
     name="frnt_cam_jnt"
